@@ -3,3 +3,7 @@
 # @Time    : 2017/3/21 21:55
 # @Author  : Feng_xia
 # @File    : index.py
+def main():
+    pass
+if __name__ == '__main__':
+    main()
