@@ -1,0 +1,13 @@
+select dbo.客户.业务,SUM(dbo.outdata.金额)
+from dbo.outdata,dbo.客户
+where dbo.outdata.客户编号=dbo.客户.客户编号 and (日期>='2015-11-1' and 日期<='2015-11-30')
+group by dbo.客户.业务
+
+
+select 编号,数量
+from dbo.outdata
+where 编号='0301057'
+
+select 类别,名称,品牌,编号
+from dbo.bill
+where 类别 is NULL
