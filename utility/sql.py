@@ -16,9 +16,22 @@ class sql_conn(object):
                       self.user_name, self.pwd)
         except win32com.Error as e:
             print("sql_server Error %d: %s" % (e.args[0], e.args[1]))
-    def cursor(self):
-        n = self.conn_sql.Execute()
-        return n
+    def select_sql(self,sql):
+        self.select_Sql = self.conn_sql.Execute(sql)[0]
+
+    def fetchall(self,sql):
+        self.select_sql(sql)
+        value = []
+        data = {}
+        for i in range(len(self.select_Sql.Fields)):
+            while not self.select_Sql.EOF:
+                value.append(self.select_Sql.Fields(i).value.rstrip())
+                self.select_Sql.MoveNext()
+            data[self.select_Sql.Fields(i).Name] = value
+            value = []
+            self.select_Sql.MoveFirst()
+        return data
     def sql_close(self):
-        self.conn_sql.Close()
+        self = None
+        return self
 
