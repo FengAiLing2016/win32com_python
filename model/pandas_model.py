@@ -68,4 +68,8 @@ def brand(num):
 
 #去空格函数
 def seller_strip(seller_str):
-    return seller_str.strip()
+    try:
+        return seller_str.strip()
+    except AttributeError as e:
+        print('有未知业务员')
+        return '其他'
