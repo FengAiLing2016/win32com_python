@@ -23,14 +23,9 @@ def main():
     # 转换数据类型
     df['金额']=df['金额'].astype(float)
 
-    # 去空格
-    df['员工姓名']=df['员工姓名'].map(pandas_model.seller_strip)
-
-    # 去空格
-    df['编号'] = df['编号'].map(pandas_model.seller_strip)
-
-    # 去空格
-    df['客户名称'] = df['客户名称'].map(pandas_model.seller_strip)
+    #遍历每列去空格
+    for col_name in df.columns:
+        df[col_name] = df[col_name].map(pandas_model.seller_strip)
 
     # 编号对应品牌
     df['品牌'] = df['编号'].map(pandas_model.brand)
@@ -40,6 +35,7 @@ def main():
 
     # 导出EXCEL
     a.to_excel('coo.xls', index=True)
+
 
 if __name__ == '__main__':
     main()

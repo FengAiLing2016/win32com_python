@@ -74,7 +74,10 @@ def brand(num):
 #去空格函数
 def seller_strip(seller_str):
     try:
-        return seller_str.strip()
+        if type(seller_str) is str:
+            return seller_str.strip()
+        else:
+            return seller_str
     except AttributeError as e:
-        print('有未知业务员')
-        return '其他'
+        print('有未知字段')
+        return '未知字段'
