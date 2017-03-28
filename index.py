@@ -23,17 +23,20 @@ def main():
     # 转换数据类型
     df['金额']=df['金额'].astype(float)
 
-    # 编号对应品牌
-    df['品牌']=df['编号'].map(pandas_model.brand)
-
     # 去空格
     df['员工姓名']=df['员工姓名'].map(pandas_model.seller_strip)
 
     # 去空格
+    df['编号'] = df['编号'].map(pandas_model.seller_strip)
+
+    # 去空格
     df['客户名称'] = df['客户名称'].map(pandas_model.seller_strip)
 
+    # 编号对应品牌
+    df['品牌'] = df['编号'].map(pandas_model.brand)
+
     # 数据透视表
-    a=pd.pivot_table(df, index=['员工姓名','客户名称','品牌'],values=['金额'],aggfunc=np.sum)
+    a=pd.pivot_table(df, index=['员工姓名','品牌'],values=['金额'],aggfunc=np.sum)
 
     # 导出EXCEL
     a.to_excel('coo.xls', index=True)

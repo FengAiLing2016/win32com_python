@@ -60,11 +60,16 @@ def brand(num):
 '860':'三利和',
 '870':'傲鹏',
 }
-    num_cut=num[0:3]
-    if num_cut in brand_dict:
-        return brand_dict[num_cut]
+    if num == '90107':
+        return  '艾诗'
+    elif num=='90108':
+        return '强生'
     else:
-        return '其他'
+        num_cut=num[0:3]
+        if num_cut in brand_dict:
+            return brand_dict[num_cut]
+        else:
+            return '其他'
 
 #去空格函数
 def seller_strip(seller_str):
