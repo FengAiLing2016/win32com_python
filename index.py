@@ -39,11 +39,11 @@ def main():
     df['品牌'] = df['编号'].map(pandas_model.brand)
 
     # 数据透视表
-    # a = pd.pivot_table(df, index=['客户名称'],columns=['员工姓名'], values=['金额'], aggfunc=np.sum,margins=True)
+    index_pt,columns_pt=pandas_model.index_columns()
+    a = pd.pivot_table(df[df['客户名称']=='昌大昌(海滨店)'], index=index_pt,columns=columns_pt, values=['金额'], aggfunc=np.sum,margins=True)
 
     # 导出EXCEL
-    # a.to_excel(pandas_model.file_data(), index=True)
-    pandas_model.index_columns(df.c)
+    a.to_excel(pandas_model.file_data(), index=True)
 
 if __name__ == '__main__':
     main()
