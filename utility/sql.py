@@ -7,7 +7,6 @@
 
 import win32com.client
 
-
 class sql_conn(object):
 
     def __init__(self, *args):
@@ -21,20 +20,19 @@ class sql_conn(object):
             self.conn_sql.Open(
                 "Provider=SQLOLEDB;SERVER=%s;DATABASE=%s" %
                 (self.server_name, self.data_name), self.user_name, self.pwd)
-        except AttributeError as e:
-            print("sql_server Error %d: %s" % (e.args[0], e.args[1]))
-        except pywintypes.com_error as e:
-            print("sql_server Error %d: %s" % (e.args[0], e.args[1]))
+        except Exception as e:
+            print("sql_server Error "% e)
+            raise
 
-    '''select函数'''
 
+
+    # select函数
     def select_sql(self, sql):
         self.select_Sql = self.conn_sql.Execute(sql)[0]
 
     # 返回SQL数据
     def fetchall(self, sql):
         self.select_sql(sql)
-        value = []
         data = {}
         value = self.select_Sql.GetRows()
         for i in range(len(value)):

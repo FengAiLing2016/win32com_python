@@ -13,9 +13,16 @@ from utility import sql, pandas_model
 
 def main():
 
+    #创建类
     sql_connection = sql.sql_conn(pandas_model.input_name())
+
+    #生成SQL查询函数
     query_seller = query.query_seller()
+
+    # 调用类的fetchall方法
     data = sql_connection.fetchall(query_seller)
+
+    # 调用类的close方法
     sql_connection.sql_close()
 
     # 创建pandas的DataFrame
@@ -32,11 +39,11 @@ def main():
     df['品牌'] = df['编号'].map(pandas_model.brand)
 
     # 数据透视表
-    a = pd.pivot_table(df, index=['客户名称'],columns=['员工姓名'], values=['金额'], aggfunc=np.sum,margins=True)
+    # a = pd.pivot_table(df, index=['客户名称'],columns=['员工姓名'], values=['金额'], aggfunc=np.sum,margins=True)
 
     # 导出EXCEL
-    a.to_excel('coo.xls', index=True)
-
+    # a.to_excel(pandas_model.file_data(), index=True)
+    pandas_model.index_columns(df.c)
 
 if __name__ == '__main__':
     main()

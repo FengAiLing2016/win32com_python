@@ -4,10 +4,20 @@
 # @Author  : Feng_xia
 # @File    : pandas_model
 
+import time
+
+
+#输入数据库函数
 def input_name():
     input_server=input('请输入服务器名:')
-    input_data='CXHBI_010_'+input('请输入数据库：')
+    if input_server == '':
+        input_server = 'gqserver'
+    input_data='CXHBI_010_%s'%''.join(input('请输入数据库名：'))
+    if input_data == 'CXHBI_010_':
+        input_data = 'CXHBI_010_2014'
     input_pas=input('请输入密码：')
+    if input_pas == '':
+        input_pas='2016guangQIANG'
     return input_server,input_data,'sa',input_pas
 
 # 品牌对应函数
@@ -78,8 +88,6 @@ def brand(num):
             return '其他'
 
 # 去空格函数
-
-
 def seller_strip(seller_str):
     try:
         if isinstance(seller_str, str):
@@ -89,3 +97,18 @@ def seller_strip(seller_str):
     except AttributeError as e:
         print('有未知字段')
         return '未知字段'
+
+#文件按照日期命名
+def file_data():
+    file_time = time.strftime('%Y%m%d%H%M%S',time.localtime(time.time()))
+    return file_time + '.xlsx'
+
+#选择数据透视表(index,columns)函数
+def index_columns():
+    index_num=input('''请输入所要查询的内容：
+            1.业务员+品牌
+            2.客户+品牌
+            3.业务员+客户+品牌
+          ''')
+    if
+
