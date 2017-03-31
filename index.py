@@ -9,6 +9,7 @@ import pandas as pd
 
 from model import query
 from utility import sql, pandas_model
+import re
 
 
 def main():
@@ -31,6 +32,7 @@ def main():
     # 转换数据类型
     df['金额'] = df['金额'].astype(float)
 
+
     # 遍历每列去空格
     for col_name in df.columns:
         df[col_name] = df[col_name].map(pandas_model.seller_strip)
@@ -38,9 +40,11 @@ def main():
     # 编号对应品牌
     df['品牌'] = df['编号'].map(pandas_model.brand)
 
+    # df['辅助列']=df['客户编号'].str.find('2014')
     # 数据透视表
     index_pt,columns_pt=pandas_model.index_columns()
-    a = pd.pivot_table(df[df['客户名称']=='昌大昌(海滨店)'], index=index_pt,columns=columns_pt, values=['金额'], aggfunc=np.sum,margins=True)
+    a = pd.pivot_table(df[df['客户编号'].isin(['2014','8014'])],index=index_pt,columns=columns_pt,
+                       values=['金额'], aggfunc=np.sum,margins=True)
 
     # 导出EXCEL
     a.to_excel(pandas_model.file_data(), index=True)
