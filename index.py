@@ -43,6 +43,7 @@ def main():
     # df['辅助列']=df['客户编号'].str.find('2014')
     # 数据透视表
     index_pt,columns_pt=pandas_model.index_columns()
+
     a = pd.pivot_table(df[df['客户编号'].isin(['2014','8014'])],index=index_pt,columns=columns_pt,
                        values=['金额'], aggfunc=np.sum,margins=True)
 

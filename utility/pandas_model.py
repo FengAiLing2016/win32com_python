@@ -106,9 +106,11 @@ def file_data():
 #选择数据透视表(index,columns)函数
 def index_columns():
     index_num=input('''请输入所要查询的内容：
-1.业务员+品牌
-2.客户+品牌
-3.业务员+客户+品牌
+1。客户查询
+
+1。业务员+品牌
+2。客户+品牌
+3。业务员+客户+品牌
 ''')
     if index_num == '1':
         return ['品牌'],['员工姓名']
