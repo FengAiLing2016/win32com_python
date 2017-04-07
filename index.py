@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from model import query
-from utility import sql, pandas_model
+from utility import sql, pandas_model,input_func
 import re
 
 
@@ -44,7 +44,9 @@ def main():
     # 数据透视表
     index_pt,columns_pt=pandas_model.index_columns()
 
-    a = pd.pivot_table(df[df['客户编号'].isin(['2014','8014'])],index=index_pt,columns=columns_pt,
+    client = input_func.input_select()
+
+    a = pd.pivot_table(df[df['客户编号'].isin(client)],index=index_pt,columns=columns_pt,
                        values=['金额'], aggfunc=np.sum,margins=True)
 
     # 导出EXCEL
