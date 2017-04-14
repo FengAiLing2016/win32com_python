@@ -23,16 +23,28 @@ def index_columns():
 
 
 def input_select():
-    print('''
-    1.输入客户
-    2.输入品牌
-    3.输入业务员
-    4.查询所有
+    input_sum=input('''
+    1.按客户查询
+    2.按业务员查询
     ''')
-    input_sel=input()
-    if  input_sel =='1':
-        input_client=input('输入客户编号，空格分开').split()
-        return input_client
+    if input_sum == '1':
+        input_client=input('''
+        1.客户品牌销售报表
+        2.客户区段品牌销售报表
+        3.区段客户区段品牌销售报表
+        ''')
+        if input_client=='1':
+            return ['客户名称'], ['品牌']
+        elif input_client=='2':
+            return
+    elif input_sum =='2':
+        input_clerk=input('''
+        1.业务员销售报表
+        2.业务员品牌销售报表
+        3.业务员区段品牌销售报表
+        ''')
+
+
 
 def query_seller():
     input_time=input('请输入日期：')
